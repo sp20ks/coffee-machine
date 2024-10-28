@@ -5,16 +5,16 @@
 #include <util/delay.h>
 
 #define F_CPU 8000000UL
-#define LCD_Dir  DDRC      // Направление порта (на выход)
-#define LCD_Port PORTC     // Порт для ЖК-дисплея
-#define RS PC0            // Пин для регистра выбора
-#define EN PC1            // Пин для разрешающего сигнала
+#define LCD_Dir  DDRC   
+#define LCD_Port PORTC     // РџРѕСЂС‚ РґР»СЏ Р–Рљ-РґРёСЃРїР»РµСЏ
+#define RS PC0            // РџРёРЅ РґР»СЏ СЂРµРіРёСЃС‚СЂР° РІС‹Р±РѕСЂР°
+#define EN PC1            // РџРёРЅ РґР»СЏ СЂР°Р·СЂРµС€Р°СЋС‰РµРіРѕ СЃРёРіРЅР°Р»Р°
 
-// Функции для работы с ЖК-дисплеем
-void LCD_Init(void);            // Инициализация ЖК-дисплея
-void LCD_Command(unsigned char cmnd);  // Отправка команды на ЖК-дисплей
-void LCD_Char(unsigned char data);     // Отправка символа на ЖК-дисплей
-void LCD_String(char *str);            // Отправка строки на ЖК-дисплей
-void LCD_Clear();                      // Очистка ЖК-дисплея
+// Р¤СѓРЅРєС†РёРё РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р–Рљ-РґРёСЃРїР»РµРµРј
+void LCD_Init(void);            // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Р–Рљ-РґРёСЃРїР»РµСЏ
+void LCD_Command(unsigned char cmnd);  // РћС‚РїСЂР°РІРєР° РєРѕРјР°РЅРґС‹ РЅР° Р–Рљ-РґРёСЃРїР»РµР№
+void LCD_Char(unsigned char data);     // РћС‚РїСЂР°РІРєР° СЃРёРјРІРѕР»Р° РЅР° Р–Рљ-РґРёСЃРїР»РµР№
+void LCD_String(char *str);            // РћС‚РїСЂР°РІРєР° СЃС‚СЂРѕРєРё РЅР° Р–Рљ-РґРёСЃРїР»РµР№
+void LCD_Clear();                      // РћС‡РёСЃС‚РєР° Р–Рљ-РґРёСЃРїР»РµСЏ
 
 #endif

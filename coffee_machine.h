@@ -6,21 +6,20 @@
 
 #define ACTION_BUTTON PD0
 #define RESET_BUTTON PD1
-// Определение этапов приготовления кофе
+// РћРїСЂРµРґРµР»РµРЅРёРµ СЌС‚Р°РїРѕРІ РїСЂРёРіРѕС‚РѕРІР»РµРЅРёСЏ РєРѕС„Рµ
 typedef enum {
-    STAGE_GRIND,    // Этап помола
-    STAGE_BREW,     // Этап заваривания
-    STAGE_STEAM,    // Этап взбивания
-    STAGE_DONE      // Завершение процесса
+    STAGE_GRIND,    // Р­С‚Р°Рї РїРѕРјРѕР»Р°
+    STAGE_BREW,     // Р­С‚Р°Рї Р·Р°РІР°СЂРёРІР°РЅРёСЏ
+    STAGE_STEAM,    // Р­С‚Р°Рї РІР·Р±РёРІР°РЅРёСЏ
+    STAGE_DONE      // Р—Р°РІРµСЂС€РµРЅРёРµ РїСЂРѕС†РµСЃСЃР°
 } CoffeeStage;
 
-
-void setup_buttons(void);                // Настройка кнопок
-void setup_lights(void);                 // Настройка индикаторов управляющих выходов
-void advance_stage(void);                 // Переход к следующему этапу
-void reset_device(void);                  // Сброс устройства
-void display_stage(CoffeeStage stage);    // Отображение текущего этапа на ЖК-дисплее
-void activate_light(CoffeeStage stage);    // Активировать индикатор для текущего этапа
+void setup_buttons(void);                // РќР°СЃС‚СЂРѕР№РєР° РєРЅРѕРїРѕРє
+void setup_lights(void);                 // РќР°СЃС‚СЂРѕР№РєР° РёРЅРґРёРєР°С‚РѕСЂРѕРІ
+void advance_stage(void);                 // РџРµСЂРµС…РѕРґ Рє СЃР»РµРґСѓСЋС‰РµРјСѓ СЌС‚Р°РїСѓ
+void reset_device(void);                  // РЎР±СЂРѕСЃ СѓСЃС‚СЂРѕР№СЃС‚РІР°
+void display_stage(CoffeeStage stage);    // РћС‚РѕР±СЂР°Р¶РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ СЌС‚Р°РїР° РЅР° Р–Рљ-РґРёСЃРїР»РµРµ
+void activate_light(CoffeeStage stage);    // РђРєС‚РёРІРёСЂРѕРІР°С‚СЊ РёРЅРґРёРєР°С‚РѕСЂ РґР»СЏ С‚РµРєСѓС‰РµРіРѕ СЌС‚Р°РїР°
 
 extern CoffeeStage current_stage;
 extern uint8_t in_progress;
