@@ -4,8 +4,8 @@
 #include <avr/io.h>
 #include "lcd.h"
 
-#define ACTION_BUTTON PD0
-#define RESET_BUTTON PD1
+#define START_BUTTON '*'  // Кнопка для запуска цикла
+#define RESET_BUTTON_KEY '#'  // Кнопка для сброса устройства
 // Определение этапов приготовления кофе
 typedef enum {
     STAGE_GRIND,    // Этап помола
@@ -14,7 +14,6 @@ typedef enum {
     STAGE_DONE      // Завершение процесса
 } CoffeeStage;
 
-void setup_buttons(void);                // Настройка кнопок
 void setup_lights(void);                 // Настройка индикаторов
 void advance_stage(void);                 // Переход к следующему этапу
 void reset_device(void);                  // Сброс устройства

@@ -4,12 +4,6 @@
 CoffeeStage current_stage = STAGE_GRIND; // Начальный этап
 uint8_t in_progress = 0;                   // Флаг для отслеживания состояния процесса
 
-// Настройка кнопок
-void setup_buttons() {
-    DDRD &= ~((1 << ACTION_BUTTON) | (1 << RESET_BUTTON)); // Устанавливаем пины кнопок на вход
-    PORTD |= (1 << ACTION_BUTTON) | (1 << RESET_BUTTON);   // Включаем подтягивающие резисторы
-}
-
 // Настройка индикаторов
 void setup_lights() {
     DDRB |= (1 << PB0) | (1 << PB1) | (1 << PB2);          // Устанавливаем пины индикаторов на выход
@@ -21,16 +15,16 @@ void display_stage(CoffeeStage stage) {
     LCD_Clear();                                         
     switch (stage) {
         case STAGE_GRIND:
-            LCD_String(in_progress ? "Grinding. A to stop" : "A - Grind");
+            LCD_String(in_progress ? "Grinding. * to stop" : "* - Grind");
             break;
         case STAGE_BREW:
-            LCD_String(in_progress ? "Brewing. A to stop" : "A - Brew");
+            LCD_String(in_progress ? "Brewing. * to stop" : "* - Brew");
             break;
         case STAGE_STEAM:
-            LCD_String(in_progress ? "Steaming. A to stop" : "A - Steam");
+            LCD_String(in_progress ? "Steaming. * to stop" : "* - Steam");
             break;
         case STAGE_DONE:
-            LCD_String("Done! R - Reset");
+            LCD_String("Done! # - Reset");
             break;
     }
 }
