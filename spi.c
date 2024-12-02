@@ -1,5 +1,8 @@
 #include "spi.h"
 
+uint8_t data[ARRAY_SIZE] = {0};
+uint8_t index_data = 0;
+
 // Инициализация SPI как мастер
 void SPI_MasterInit(void) {
     DDRB |= (1 << SCK_BIT) | (1 << MOSI_BIT) | (1 << SS_BIT); // SCK, MOSI, SS - выходы

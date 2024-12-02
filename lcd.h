@@ -16,6 +16,6 @@ void LCD_Command(unsigned char cmnd);  // Отправка команды на �
 void LCD_Char(unsigned char data);     // Отправка символа на ЖК-дисплей
 void LCD_String(char *str);            // Отправка строки на ЖК-дисплей
 void LCD_Clear();                      // Очистка ЖК-дисплея
-void LCD_PrintArray(uint8_t *data, uint8_t size); // Печать массива на ЖК-дисплей
+void LCD_Number(uint8_t data); // Печать числа на ЖК-дисплей
 
 #endif

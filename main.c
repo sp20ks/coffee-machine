@@ -1,12 +1,15 @@
 #include "coffee_machine.h"
 #include "lcd.h"
+#include "spi.h"
 #include "keypad.h"
 
 int main() {
+    SPI_SlaveInit(); // Настройка SPI
     LCD_Init();           // Инициализация ЖК-дисплея
     keypad_init();        // Настройка клавы
     setup_lights();       // Настройка индикаторов
     display_stage(current_stage);  // Отображение текущего этапа
+    setup_timer();
 
     char key;
     uint8_t action_button_pressed = 0;  // Флаг для отслеживания состояния кнопки действия

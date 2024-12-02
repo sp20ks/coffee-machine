@@ -69,18 +69,15 @@ void LCD_Clear() {
     LCD_Command(0x80);                            // Установка курсора на первую строку
 }
 
-// Печать массива на ЖК-дисплей
-void LCD_PrintArray(uint8_t *data, uint8_t size) {
-    for (uint8_t i = 0; i < size; ++i) {
-        if (data[i] >= 100) {
-            LCD_Char((data[i] / 100) + '0');
-            data[i] %= 100;
-        }
-        if (data[i] >= 10) {
-            LCD_Char((data[i] / 10) + '0');
-            data[i] %= 10;
-        }
-        LCD_Char(data[i] + '0');
-        LCD_Char(' ');
+// Печать числа на ЖК-дисплей
+void LCD_Number(uint8_t data) {
+    if (data >= 100) {
+        LCD_Char((data / 100) + '0');
+        data %= 100;
     }
+    if (data >= 10) {
+        LCD_Char((data / 10) + '0');
+        data %= 10;
+    }
+    LCD_Char(data + '0');
 }

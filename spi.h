@@ -5,7 +5,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-#define ARRAY_SIZE 5  // Размер массива
+#define ARRAY_SIZE 4  // Размер массива
 #define SCK_BIT  7
 #define MISO_BIT 6
 #define MOSI_BIT 5

@@ -4,6 +4,9 @@
 CoffeeStage current_stage = STAGE_GRIND; // Начальный этап
 uint8_t in_progress = 0;                   // Флаг для отслеживания состояния процесса
 CoffeeConfig coffee_config = {0, 0, 0, 0, 0}; // Настройки
+uint16_t start_time = 0; // Начало этапа
+uint16_t end_time = 0; // Конец этапа
+uint16_t current_time = 0; // Счетчик миллисекунд
 
 // Настройка индикаторов
 void setup_lights() {
@@ -57,8 +60,12 @@ void advance_stage() {
         display_stage(current_stage);              // Возвращаем предыдущее сообщение
         return;
     }
-
+    
     if (in_progress) {                             // Если процесс идет
+        end_time = get_current_time_ms();              // Фиксируем конец этапа
+
+        data[current_stage] = (end_time - start_time + 500) / 1000;  // Записываем длительность в массив data
+
         in_progress = 0;                           // Завершаем процесс
         activate_light(current_stage);             // Включаем индикатор текущего этапа
         if (current_stage == STAGE_STEAM) {        // Если текущий этап - вспенивание
@@ -75,6 +82,8 @@ void advance_stage() {
             for (uint16_t i = 0; i < coffee_config.brew_duration; i++) {
                 _delay_ms(1000);                   // Ждем 1 секунду в цикле
             }
+            data[current_stage] = coffee_config.brew_duration;  // Записываем длительность в массив data
+      
             in_progress = 0;                       // Этап завершен
             activate_light(current_stage);             // Включаем индикатор текущего этапа
             current_stage = STAGE_STEAM;           // Переходим к следующему этапу
@@ -87,6 +96,12 @@ void advance_stage() {
 void reset_device() {
     current_stage = STAGE_GRIND;
     in_progress = 0;
+    start_time = 0;
+    end_time = 0;
+    coffee_config.configured = 0;
+    for (uint8_t i = 0; i < STAGE_DONE; i++) {
+        data[i] = 0;
+    }
     PORTB &= ~((1 << PB0) | (1 << PB1) | (1 << PB2));
     display_stage(current_stage);
 }
@@ -108,4 +123,25 @@ void configure_coffee() {
     coffee_config.configured = 1; // Параметры заданы
     LCD_Clear();
     LCD_String("Config Saved!");
+}
+
+// Таймер для измерения времени
+uint16_t get_current_time_ms() {
+    cli(); // Запрещаем прерывания
+    uint16_t ms = current_time;
+    sei(); // Разрешаем прерывания
+    return ms;
+}
+
+// // Настройка таймера
+void setup_timer() {
+    TCCR0 = (1 << WGM01); // Включаем режим CTC
+    OCR0 = 62;            // Устанавливаем значение сравнения (для 1 мс при 4 МГц с делителем 64)
+    TIMSK |= (1 << OCIE0); // Разрешаем прерывания по совпадению
+    TCCR0 |= (1 << CS01) | (1 << CS00); // Устанавливаем делитель 64
+    sei(); // Разрешаем глобальные прерывания
+}
+
+ISR(TIMER0_COMP_vect) {
+    current_time++; // Увеличиваем счетчик миллисекунд
 }
