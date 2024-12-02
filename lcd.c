@@ -68,3 +68,19 @@ void LCD_Clear() {
     _delay_ms(2);                                 // Задержка для выполнения команды
     LCD_Command(0x80);                            // Установка курсора на первую строку
 }
+
+// Печать массива на ЖК-дисплей
+void LCD_PrintArray(uint8_t *data, uint8_t size) {
+    for (uint8_t i = 0; i < size; ++i) {
+        if (data[i] >= 100) {
+            LCD_Char((data[i] / 100) + '0');
+            data[i] %= 100;
+        }
+        if (data[i] >= 10) {
+            LCD_Char((data[i] / 10) + '0');
+            data[i] %= 10;
+        }
+        LCD_Char(data[i] + '0');
+        LCD_Char(' ');
+    }
+}

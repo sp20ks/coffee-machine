@@ -4,7 +4,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define F_CPU 8000000UL
+// #define F_CPU 8000000UL
 #define LCD_Dir  DDRC   
 #define LCD_Port PORTC     // Порт для ЖК-дисплея
 #define RS PC0            // Пин для регистра выбора
@@ -16,5 +16,6 @@ void LCD_Command(unsigned char cmnd);  // Отправка команды на �
 void LCD_Char(unsigned char data);     // Отправка символа на ЖК-дисплей
 void LCD_String(char *str);            // Отправка строки на ЖК-дисплей
 void LCD_Clear();                      // Очистка ЖК-дисплея
+void LCD_PrintArray(uint8_t *data, uint8_t size); // Печать массива на ЖК-дисплей
 
 #endif
