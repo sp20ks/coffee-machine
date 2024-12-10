@@ -15,7 +15,7 @@ void SPI_MasterInit(void) {
 void SPI_SlaveInit(void) {
     DDRB |= (1 << MISO_BIT);  // MISO - выход
     DDRB &= ~((1 << SCK_BIT) | (1 << MOSI_BIT) | (1 << SS_BIT)); // SCK, MOSI, SS - входы
-    SPCR = (1 << SPE) | (1 << SPIE); // Включаем SPI и прерывания
+    SPCR = (1 << SPE) | (1 << SPIE); // Включаем SPI и прерывания (SPIE - SPI interrupt enable)
     sei(); // Разрешаем прерывания
 }
 

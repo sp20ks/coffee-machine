@@ -133,9 +133,10 @@ uint16_t get_current_time_ms() {
     return ms;
 }
 
-// // Настройка таймера
+// Настройка таймера
 void setup_timer() {
-    TCCR0 = (1 << WGM01); // Включаем режим CTC
+    // WGM - Waveform Generation Mode
+    TCCR0 = (1 << WGM01); // Включаем режим CTC (Clear Timer on Compare Match)
     OCR0 = 62;            // Устанавливаем значение сравнения (для 1 мс при 4 МГц с делителем 64)
     TIMSK |= (1 << OCIE0); // Разрешаем прерывания по совпадению
     TCCR0 |= (1 << CS01) | (1 << CS00); // Устанавливаем делитель 64
